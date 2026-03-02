@@ -4,7 +4,7 @@
 class Node:
     def __init__(self, data):
         self.data = data
-        self.next = None
+        self.address = None
 
 
 # Linked List class
@@ -14,22 +14,23 @@ class SinglyLinkedList:
 
     # 1️⃣ Insert at beginning
     def insert_beginning(self, data):
-        new_node = Node(data)
-        new_node.next = self.head
-        self.head = new_node
+        newNode = Node(data)
+        newNode.address = self.head
+        self.head = newNode
 
     # 2️⃣ Insert at end
     def insert_end(self, data):
-        new_node = Node(data)
+        newNode = Node(data)
 
         if self.head is None:
-            self.head = new_node
+            self.head = newNode
             return
 
-        temp = self.head
-        while temp.next:
-            temp = temp.next
-        temp.next = new_node
+        currentNode = self.head
+        while currentNode.address!= None:
+            currentNode = currentNode.address
+            
+        currentNode.address = newNode
 
     # 3️⃣ Insert at given position (1-based index)
     def insert_position(self, position, data):
@@ -37,28 +38,28 @@ class SinglyLinkedList:
             self.insert_beginning(data)
             return
 
-        new_node = Node(data)
-        temp = self.head
+        newNode = Node(data)
+        currentNode = self.head
 
         for _ in range(position - 2):
-            if temp is None:
+            if currentNode is None:
                 print("Invalid Position")
                 return
-            temp = temp.next
+            currentNode = currentNode.address
 
-        if temp is None:
+        if currentNode is None:
             print("Invalid Position")
             return
 
-        new_node.next = temp.next
-        temp.next = new_node
+        newNode.address = currentNode.address
+        currentNode.address = newNode
 
     # 4️⃣ Delete from beginning
     def delete_beginning(self):
         if self.head is None:
             print("List is empty")
             return
-        self.head = self.head.next
+        self.head = self.head.address
 
     # 5️⃣ Delete from end
     def delete_end(self):
@@ -66,15 +67,15 @@ class SinglyLinkedList:
             print("List is empty")
             return
 
-        if self.head.next is None:
+        if self.head.address is None:
             self.head = None
             return
 
-        temp = self.head
-        while temp.next.next:
-            temp = temp.next
+        currentNode = self.head
+        while currentNode.address.address:
+            currentNode = currentNode.address
 
-        temp.next = None
+        currentNode.address = None
 
     # ⭐ NEW: Delete at position p
     def delete_position(self, position):
@@ -85,35 +86,35 @@ class SinglyLinkedList:
 
         # delete first node
         if position == 1:
-            self.head = self.head.next
+            self.head = self.head.address
             return
 
-        temp = self.head
+        currentNode = self.head
 
         # move to (position-1) node
         for _ in range(position - 2):
-            if temp is None or temp.next is None:
+            if currentNode is None or currentNode.address is None:
                 print("Invalid Position")
                 return
-            temp = temp.next
+            currentNode = currentNode.address
 
-        if temp.next is None:
+        if currentNode.address is None:
             print("Invalid Position")
             return
 
         # skip node
-        temp.next = temp.next.next
+        currentNode.address = currentNode.address.address
 
     # 6️⃣ Search element
     def search(self, key):
-        temp = self.head
+        currentNode = self.head
         position = 1
 
-        while temp:
-            if temp.data == key:
+        while currentNode:
+            if currentNode.data == key:
                 print(f"Element found at position {position}")
                 return
-            temp = temp.next
+            currentNode = currentNode.address
             position += 1
 
         print("Element not found")
@@ -124,10 +125,10 @@ class SinglyLinkedList:
             print("List is empty")
             return
 
-        temp = self.head
-        while temp:
-            print(temp.data, end=" -> ")
-            temp = temp.next
+        currentNode = self.head
+        while currentNode:
+            print(currentNode.data, end=" -> ")
+            currentNode = currentNode.address
         print("None")
 
 

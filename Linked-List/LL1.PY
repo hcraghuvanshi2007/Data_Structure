@@ -10,27 +10,27 @@ class Node:
 # Linked List class
 class SinglyLinkedList:
     def __init__(self):
-        self.head = None
+        sh = None
 
     # 1️⃣ Insert at beginning
     def insert_beginning(self, data):
-        newNode = Node(data)
-        newNode.address = self.head
-        self.head = newNode
+        nN = Node(data)
+        nN.address = sh
+        sh = nN
 
     # 2️⃣ Insert at end
     def insert_end(self, data):
-        newNode = Node(data)
+        nN = Node(data)
 
-        if self.head is None:
-            self.head = newNode
+        if sh is None:
+            sh = nN
             return
 
-        currentNode = self.head
-        while currentNode.address!= None:
-            currentNode = currentNode.address
+        cN = sh
+        while cN.address!= None:
+            cN = cN.address
             
-        currentNode.address = newNode
+        cN.address = nN
 
     # 3️⃣ Insert at given position (1-based index)
     def insert_position(self, position, data):
@@ -38,97 +38,97 @@ class SinglyLinkedList:
             self.insert_beginning(data)
             return
 
-        newNode = Node(data)
-        currentNode = self.head
+        nN = Node(data)
+        cN = sh
 
         for _ in range(position - 2):
-            if currentNode is None:
+            if cN is None:
                 print("Invalid Position")
                 return
-            currentNode = currentNode.address
+            cN = cN.address
 
-        if currentNode is None:
+        if cN is None:
             print("Invalid Position")
             return
 
-        newNode.address = currentNode.address
-        currentNode.address = newNode
+        nN.address = cN.address
+        cN.address = nN
 
     # 4️⃣ Delete from beginning
     def delete_beginning(self):
-        if self.head is None:
+        if sh is None:
             print("List is empty")
             return
-        self.head = self.head.address
+        sh = sh.address
 
     # 5️⃣ Delete from end
     def delete_end(self):
-        if self.head is None:
+        if sh is None:
             print("List is empty")
             return
 
-        if self.head.address is None:
-            self.head = None
+        if sh.address is None:
+            sh = None
             return
 
-        currentNode = self.head
-        while currentNode.address.address:
-            currentNode = currentNode.address
+        cN = sh
+        while cN.address.address:
+            cN = cN.address
 
-        currentNode.address = None
+        cN.address = None
 
     # ⭐ NEW: Delete at position p
     def delete_position(self, position):
 
-        if self.head is None:
+        if sh is None:
             print("List is empty")
             return
 
         # delete first node
         if position == 1:
-            self.head = self.head.address
+            sh = sh.address
             return
 
-        currentNode = self.head
+        cN = sh
 
         # move to (position-1) node
         for _ in range(position - 2):
-            if currentNode is None or currentNode.address is None:
+            if cN is None or cN.address is None:
                 print("Invalid Position")
                 return
-            currentNode = currentNode.address
+            cN = cN.address
 
-        if currentNode.address is None:
+        if cN.address is None:
             print("Invalid Position")
             return
 
         # skip node
-        currentNode.address = currentNode.address.address
+        cN.address = cN.address.address
 
     # 6️⃣ Search element
     def search(self, key):
-        currentNode = self.head
+        cN = sh
         position = 1
 
-        while currentNode:
-            if currentNode.data == key:
+        while cN:
+            if cN.data == key:
                 print(f"Element found at position {position}")
                 return
-            currentNode = currentNode.address
+            cN = cN.address
             position += 1
 
         print("Element not found")
 
     # 7️⃣ Display / Traversal linked list
     def display(self):
-        if self.head is None:
+        if sh is None:
             print("List is empty")
             return
 
-        currentNode = self.head
-        while currentNode:
-            print(currentNode.data, end=" -> ")
-            currentNode = currentNode.address
+        cN = sh
+        while cN:
+            print(cN.data, end=" -> ")
+            cN = cN.address
         print("None")
 
 

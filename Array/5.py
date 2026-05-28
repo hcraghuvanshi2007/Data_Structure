@@ -3,9 +3,9 @@ arr = [1, 2, 2, 3, 4, 4, 5]
 
 distinct = []
 
-for x in arr:
-    if x not in distinct:
-        distinct.append(x)
+for i in arr:
+    if i not in distinct:
+        distinct.append(i)
 
 print("Distinct elements:", distinct)
 
